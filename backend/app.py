@@ -3,7 +3,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from dotenv import load_dotenv
-from db_logger import user_log
 
 
 # Load environment variables from backend/.env
@@ -99,14 +98,6 @@ def get_weather(city, uid = "anonymous"):
         "code": code,
         "emoji": emoji,
     }
-
-    try:
-        user_log(
-        city=result["city"],
-        temp_c=result["temperature"],
-    )
-    except Exception as e:
-        print(f"DB logging failed: {e}")
 
     return result
 
