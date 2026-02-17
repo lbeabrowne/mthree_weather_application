@@ -1,29 +1,6 @@
-# Start your image with a node base image
-# FROM node:22-alpine
-
-# The /app directory should act as the main application directory
-# WORKDIR /app
-
-# Copy the app package and package-lock.json file
-# COPY frontend/package*.json ./
-
-# Copy local directories to the current local directory of our docker image (/app)
-# COPY frontend/src ./src
-# COPY frontend/public ./public
-
-# Install node packages, install serve, build the app, and remove dependencies at the end
-# RUN npm install \
-    # && npm install -g serve@latest \
-    # && npm run build \
-    # && rm -fr node_modules
-
-# EXPOSE 3000
-
-# Start the app using serve command
-# CMD [ "serve", "-s", "build" ] 
 
 # -------------------------
-# 1️⃣ Build React frontend
+# 1. Build React frontend
 # -------------------------
 FROM node:22-alpine AS frontend-builder
 
@@ -34,9 +11,8 @@ COPY frontend/src ./src
 COPY frontend/public ./public
 RUN npm run build
 
-
 # -------------------------
-# 2️⃣ FastAPI backend
+# 2. FastAPI backend
 # -------------------------
 FROM python:3.12-alpine
 
