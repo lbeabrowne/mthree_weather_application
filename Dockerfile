@@ -5,11 +5,11 @@ FROM node:22-alpine
 WORKDIR /app
 
 # Copy the app package and package-lock.json file
-COPY .frontend/package*.json ./
+COPY frontend/package*.json ./
 
 # Copy local directories to the current local directory of our docker image (/app)
-COPY .frontend/src ./src
-COPY .frontend/public ./public
+COPY frontend/src ./src
+COPY frontend/public ./public
 
 # Install node packages, install serve, build the app, and remove dependencies at the end
 RUN npm install \
