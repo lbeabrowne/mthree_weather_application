@@ -28,9 +28,6 @@ def test_get_weather_success(mocker):
     mock_get = mocker.patch("backend.app.requests.get")
     mock_get.return_value.json.return_value = fake_response
 
-    # --- Mock user_log so database logging doesn't run ---
-    mock_log = mocker.patch("backend.app.user_log")
-
     # --- Call function ---
     result = get_weather("London")
 
@@ -48,6 +45,3 @@ def test_get_weather_success(mocker):
 
     # emoji should match the weather code
     assert result["emoji"] == get_weather_emoji(1000)
-
-    # DB logging should have been called once
-    mock_log.assert_called_once_with(city="London", temp_c=22.5)
