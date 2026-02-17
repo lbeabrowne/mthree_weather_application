@@ -210,7 +210,9 @@ def get_hottest_uk_city():
 
     return hottest_city
 
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+# Mount frontend only if it exists (prevents CI failures)
+if os.path.isdir("static"):
+    app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 # NOTE FOR YOUR GROUP:
 # Run locally:
