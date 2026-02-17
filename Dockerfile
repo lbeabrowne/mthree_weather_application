@@ -10,6 +10,7 @@ COPY frontend/package*.json ./
 # Copy local directories to the current local directory of our docker image (/app)
 COPY frontend/src ./src
 COPY frontend/public ./public
+COPY backend ./backend
 
 # Install node packages, install serve, build the app, and remove dependencies at the end
 RUN npm install \
@@ -17,7 +18,7 @@ RUN npm install \
     && npm run build \
     && rm -fr node_modules
 
-EXPOSE 3000
+EXPOSE 3000 5000
 
 # Start the app using serve command
 CMD [ "serve", "-s", "build" ]
