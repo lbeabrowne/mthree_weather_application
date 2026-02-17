@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import requests
 from dotenv import load_dotenv
+from fastapi.staticfiles import StaticFiles
 
 
 # Load environment variables from backend/.env
@@ -209,6 +210,7 @@ def get_hottest_uk_city():
 
     return hottest_city
 
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
 
 # NOTE FOR YOUR GROUP:
 # Run locally:
