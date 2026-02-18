@@ -1,13 +1,13 @@
 <div id="header" align="center">
-  <h1>Welcome to our mthree group project! 👋  </h1>
-  <h3>Conor Norman, Saaheb Kohli, Lok Tin Cheng, Lucy Browne​</h3>
+  <h1>Containerised Weather Application! 👋  </h1>
+  <h3>Extension of mthree group project, where now it can be Dockerised!​</h3>
   <img src="UK_weather_application.png" width="500">
 </div>
 
-### 📚 What this includes:
-- This was a group project of final 4 days of Mthree Tech Training course.
-- We built a front-end React application for users to search for current and forecast weather results, using connection via FastAPI to back-end Python script where data is fetched from weatherAPI.com (free weather API source).
-- We also added a connection to an Azure SQL database where the log of locations searched for is saved and can be queried.
+### 🚀 Key Info:
+- docker.yml workflow file builds a Docker Image and pushes to Docker Hub, where a Docker Container can then be run from
+- back-end uses a weather API (https://www.weatherapi.com/) to fetch data from therefore WEATHER_API_KEY must be added as an environment variable when running the container
+- in settings of GitHub repo, secrets for WEATHER_API_KEY, DOCKER_HUB_USERNAME and DOCKER_HUB_PASSWORD should be added
 
 ### 👩‍💻 Tech Stack:
-Python | SQL | React(JavaScript & CSS) | Git | Jira
+Docker | Python | SQL | React(JavaScript, CSS, HTML) | Git | Jira
