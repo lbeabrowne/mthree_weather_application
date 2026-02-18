@@ -31,13 +31,13 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            lbeabrowne/weather-app:latest
-            lbeabrowne/weather-app:${{ github.sha }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/weather-app:latest
+            ${{ secrets.DOCKER_HUB_USERNAME }}/weather-app:${{ github.sha }}
 
       - name: Run container and test API key
         run: |
           # Run container in detached mode with WEATHER_API_KEY injected
-          docker run -d --name weather-test -e WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }} -p 8000:8000 lbeabrowne/weather-app:latest
+          docker run -d --name weather-test -e WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }} -p 8000:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/weather-app:latest
           
           # Wait a few seconds for FastAPI to start
           sleep 5
