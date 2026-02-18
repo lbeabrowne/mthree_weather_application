@@ -27,6 +27,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: weather-app:latest
+          tags: lbeabrowne/weather-app:latest
 
 
