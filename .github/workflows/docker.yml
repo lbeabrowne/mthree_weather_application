@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build and Push Docker Image
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-        WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+      WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
 
     steps:
       - name: Checkout repository
@@ -24,12 +24,33 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build and Push Docker Image
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: lbeabrowne/weather-app:latest
+          tags: |
+            lbeabrowne/weather-app:latest
+            lbeabrowne/weather-app:${{ github.sha }}
+
+      - name: Run container and test API key
+        run: |
+          # Run container in detached mode with WEATHER_API_KEY injected
+          docker run -d --name weather-test -e WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }} -p 8000:8000 lbeabrowne/weather-app:latest
+          
+          # Wait a few seconds for FastAPI to start
+          sleep 5
+          
+          # Verify API key is present inside the container
+          docker exec weather-test sh -c 'echo $WEATHER_API_KEY'
+
+          # Optional: hit a health endpoint to ensure backend is running
+          curl -s http://localhost:8000/api/health
+
+          # Stop and remove the test container
+          docker stop weather-test
+          docker rm weather-test
+
 
 
