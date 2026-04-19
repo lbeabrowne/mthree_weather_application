@@ -31,3 +31,14 @@ htmlcov/
 # --- OS-specific junk ---
 .DS_Store
 Thumbs.db
+
+# --- Cypress generated artifacts ---
+cypress/screenshots
+cypress/videos
+cypress/downloads
+
+# --- Cypress cache (downloaded browser binaries) ---
+.cypress-cache
+
+# --- Node Modules folder ---
+node_modules/

@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "cypress": "^15.14.0",
+    "wait-on": "^9.0.5"
+  },
+  "scripts": {
+    "cy:wait": "wait-on --timeout 60000 --interval 2000 http://localhost:8000 && cypress open"
+  }
+}
