@@ -1,7 +1,7 @@
 
 function Spinner() {
   return (
-    <div className="spinner-container">
+    <div data-cy="spinner" className="spinner-container">
       <div className="spinner-sun">☀️</div>
     </div>
   );
