@@ -27,13 +27,14 @@ function App() {
       {/* Search form */}
       <form className="search-form" onSubmit={handleSubmit}>
         <input
+          data-cy="city-input"
           type="text"
           placeholder="Enter a UK city, e.g. London"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           className="search-input"
         />
-        <button type="submit" className="search-button">
+        <button data-cy="city-submit" type="submit" className="search-button">
           Search
         </button>
       </form>

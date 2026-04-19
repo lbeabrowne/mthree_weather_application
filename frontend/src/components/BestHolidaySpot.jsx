@@ -31,12 +31,13 @@ function BestHolidaySpot() {
 
       <form className="best-holiday-form" onSubmit={fetchBestCity}>
         <input
+          data-cy="date-select"
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           className="date-input"
         />
-        <button type="submit" className="search-button">
+        <button data-cy="holiday-submit" type="submit" className="search-button">
           Find
         </button>
       </form>

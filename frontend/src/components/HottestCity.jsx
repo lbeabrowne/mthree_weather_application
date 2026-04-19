@@ -22,7 +22,7 @@ function HottestCity() {
     <div className="hottest-card">
       <h2 className="hottest-title">Hottest UK City Right Now</h2>
 
-      <button onClick={fetchHottestCity} className="search-button">
+      <button data-cy="hottest-submit" onClick={fetchHottestCity} className="search-button">
         Find Hottest City
       </button>
 
