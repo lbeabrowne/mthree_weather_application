@@ -1,6 +1,6 @@
 # Running Cypress Tests — UK Weather Finder
 
-A friendly guide for QA and non-technical teammates. No coding experience needed — just follow the steps in order.
+A guide for running the Cypress end-to-end test suite against the locally Dockerised app.
 
 ---
 
@@ -9,7 +9,7 @@ A friendly guide for QA and non-technical teammates. No coding experience needed
 Before running any tests, make sure these three things are true:
 
 **1. Your Docker container is running.**
-The app needs to be up and serving traffic. If you're not sure, ask a developer to confirm or run:
+The app needs to be up and serving traffic:
 ```bash
 docker-compose up -d
 ```
@@ -18,7 +18,7 @@ docker-compose up -d
 Open your browser and visit [http://localhost:8000](http://localhost:8000). If you see the UK Weather Finder app, you're good to go.
 
 **3. Cypress and `wait-on` are installed.**
-These are installed automatically when the project is set up (`npm install`). If you've never run that, ask a developer to do it once — you won't need to again.
+These are installed automatically when the project is set up (`npm install`).
 
 ---
 
@@ -79,22 +79,79 @@ A successful run looks like this in your terminal:
 ```
   UK Weather Finder
     Page load
-      ✓ displays the app title
-      ✓ renders the city input and search button
-      ✓ does not show a weather card on initial load
+      ✓ displays the app title (1166ms)
+      ✓ renders the city input and search button (444ms)
+      ✓ does not show a weather card on initial load (269ms)
     City weather search
       happy path
-        ✓ renders the city and country
-        ✓ renders the temperature rounded to the nearest degree
-        ...
+        ✓ renders the city and country (1179ms)
+        ✓ renders the local time (973ms)
+        ✓ renders the weather description (857ms)
+        ✓ renders the temperature rounded to the nearest degree (1354ms)
+        ✓ renders the feels-like temperature rounded to the nearest degree (930ms)
+        ✓ renders the humidity percentage (864ms)
+        ✓ renders the weather icon with correct alt text (1024ms)
+      empty input
+        ✓ does not fire a network request when the input is blank (254ms)
+        ✓ does not render a weather card when the input is blank (195ms)
+        ✓ does not fire a network request when the input is only whitespace (398ms)
+      optional field degradation
+        ✓ renders the weather card without crashing when localtime is absent (834ms)
+        ✓ renders the weather card without crashing when icon is absent (963ms)
+        ✓ still renders core fields correctly (1050ms)
     Hottest City
-      ✓ shows a spinner while the request is in flight
-      ...
+      happy path
+        ✓ shows a spinner while the request is in flight then hides it (525ms)
+        ✓ renders the city name (672ms)
+        ✓ renders the region (802ms)
+        ✓ renders the temperature (869ms)
+        ✓ renders the weather condition (674ms)
+        ✓ renders the weather icon (776ms)
+      edge case: region matches city
+        ✓ renders without duplicating the location label (400ms)
+    Best Holiday Spot
+      happy path
+        ✓ shows a spinner while the request is in flight then hides it (1024ms)
+        ✓ renders the best city name (943ms)
+        ✓ renders the maximum temperature (942ms)
+        ✓ renders the rain chance (1120ms)
+        ✓ renders the weather icon (1024ms)
+        ✓ sends the selected date as a query parameter (878ms)
+      optional field degradation
+        ✓ renders without crashing when icon is absent (864ms)
 
-  22 passing (4s)
+
+  30 passing (29s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        30                                                                               │
+  │ Passing:      30                                                                               │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     28 seconds                                                                       │
+  │ Spec Ran:     weather.cy.js                                                                    │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✔  weather.cy.js                            00:28       30       30        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✔  All specs passed!                        00:28       30       30        -        -        -
 ```
 
-All tests green and a passing count at the bottom means everything is working as expected.
+30 tests, 0 failing, and `✔ All specs passed!` at the bottom means everything is working as expected.
 
 ---
 
