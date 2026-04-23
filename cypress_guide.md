@@ -6,18 +6,12 @@ A guide for running the Cypress end-to-end test suite against the locally Docker
 
 ## Prerequisites
 
-Before running any tests, make sure these three things are true:
+Before running any tests, make sure these two things are true:
 
-**1. Your Docker container is running.**
-The app needs to be up and serving traffic:
-```bash
-docker-compose up -d
-```
-
-**2. The app is reachable at `localhost:8000`.**
+**1. The app is reachable at `localhost:8000`.**
 Open your browser and visit [http://localhost:8000](http://localhost:8000). If you see the UK Weather Finder app, you're good to go.
 
-**3. Cypress and `wait-on` are installed.**
+**2. Cypress and `wait-on` are installed.**
 These are installed automatically when the project is set up (`npm install`).
 
 ---
