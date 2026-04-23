@@ -1,5 +1,5 @@
 // Import custom commands (always required)
-import './commands'
+// import './commands'
 
 // Optional: hide XHR noise from the command log
 const origLog = Cypress.log.bind(Cypress)

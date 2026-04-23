@@ -196,7 +196,7 @@ describe("UK Weather Finder", () => {
         }).as("getHottestCity");
       });
 
-      it("shows a spinner while the request is in flight", () => {
+      it("shows a spinner while the request is in flight then hides it", () => {
         cy.get("[data-cy='hottest-submit']").click();
         // Spinner must appear before the response resolves
         cy.get("[data-cy='spinner']").should("exist");
